@@ -11,12 +11,11 @@ const CadastrarNoticia = ()=>{
     const [autor,setAutor] = useState('');
     const [autores,setAutores]= useState<IAutor[]>([]);
     const [data_publicacao, setData_publicacao]= useState('');
-
+    
     useEffect(()=>{
-        api.get<{ autores: IAutor[]} >('autores/')
-            .then(resposta=> setAutores(resposta.data.autores))
+        api.get<IAutor[]>('autores/')
+            .then(resposta=> setAutores(resposta.data))
     }, []);
-
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>)=>{
         evento.preventDefault()
         const formData = new FormData();
@@ -26,7 +25,7 @@ const CadastrarNoticia = ()=>{
         formData.append('autor',autor);
         formData.append('data',data_publicacao);
        
-
+        alert(titulo+conteudo+data_publicacao+autor)
         api.request({
             url: 'cadastrar-noticia/',
             method: 'POST',
@@ -40,17 +39,19 @@ const CadastrarNoticia = ()=>{
                 setConteudo('')
                 setAutor('')
                 setData_publicacao('')
+                
                 alert('Noticia cadastrada com sucesso')
             })
             .catch(erro => console.log(erro))
     }
-    const date = new Date().toLocaleDateString()
+    const date = new Date().toLocaleDateString();
+    
     return(
         <>
         <Cabecalho />
         <Box sx={{marginLeft:'auto',marginRight:'auto', backgroundColor: '#bbb3b3',width:'40%',borderRadius:'10px',marginTop:'2%'}}>
             <Typography component={"h1"} variant={"h6"} sx={{textAlign: 'center',margin:'1%',color:'#111111'}} >Cadastre sua Noticia</Typography>
-            <Box component={"form"} sx={{display:'grid',justifyContent:'center'}} onSubmit={aoSubmeterForm}>
+            <Box component="form" sx={{display:'grid',justifyContent:'center'}} onSubmit={aoSubmeterForm}>
                 <TextField
                 value={titulo}
                 onChange={evento=> setTitulo(evento.target.value)}
@@ -66,7 +67,7 @@ const CadastrarNoticia = ()=>{
                 margin="dense"
                 />
                 <TextField
-                value={date}
+                value={data_publicacao}
                 onChange={evento=> setData_publicacao(evento.target.value)}
                 margin="dense"
                 />
@@ -74,13 +75,13 @@ const CadastrarNoticia = ()=>{
                 <FormControl margin="dense" fullWidth>
                     <InputLabel id="select-autor">Autor</InputLabel>
                     <Select labelId="select-autor" value={autor} onChange={evento=> setAutor(evento.target.value)}>
-                        {autores.map(autor=><MenuItem key={autor.id} value={autor.nome}>
-                            {autor.nome}
+                        {autores.map(item => <MenuItem  value={item.nome}>
+                            <option value={item.id}>{item.nome}</option>
                         </MenuItem>)}
                     </Select>
-                    
-                    <Button sx={{marginTop: 1}} type="submit" fullWidth>Salvar</Button>
+                
                 </FormControl>
+                <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Cadastrar Noticia</Button>
             </Box>
         </Box>
         </>

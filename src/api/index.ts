@@ -2,6 +2,6 @@ import https from 'https'
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: "https://backend-projeto-edglobo.herokuapp.com/",
+    baseURL: "http://localhost:3000/",
 })
 export default api
