@@ -3,33 +3,28 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typo
 import Cabecalho from "../../Components/Cabecalho";
 import { useEffect, useState } from "react"
 import api from "../../api";
+import axios from "axios";
 const CadastrarAutor = () => {
     const [nome, setNome]=useState('');
     const [idade, setIdade]=useState('');
     
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>)=>{
         evento.preventDefault()
-        const formData= new FormData();
-
-        formData.append("nome",nome);
-        formData.append("idade",idade);
-
         api.request({
             url: 'cadastrar-autor/',
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-
-            data: formData
+            data:{
+                nome: nome,
+                idade:idade
+            }
         })
             .then(()=>{
                 setNome('')
                 setIdade('')
-                alert(nome+idade)
                 alert('autor cadastrado')
             })
             .catch(erro => console.log(erro))
+            
     }
     return(
         <>
