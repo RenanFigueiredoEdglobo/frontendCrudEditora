@@ -85,7 +85,7 @@ const AtualizarNoticia = ()=>{
                         </MenuItem>)}
                     </Select>
                 </FormControl>
-                <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Cadastrar Noticia</Button>
+                <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Atualizar Noticia</Button>
             </Box>
         </Box>
         </>

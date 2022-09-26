@@ -2,6 +2,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api";
+import Cabecalho from "../../../Components/Cabecalho";
 import IAutor from "../../../interfaces/IAutor";
 
 const AtualizarAutor = ()=>{
@@ -39,6 +40,7 @@ const AtualizarAutor = ()=>{
     }
     return(
         <>
+        <Cabecalho />
         <Box sx={{marginLeft:'auto',marginRight:'auto', backgroundColor: '#bbb3b3',width:'40%',borderRadius:'10px',marginTop:'2%'}}>
             <Typography component={"h1"} variant={"h6"} sx={{textAlign: 'center',margin:'1%',color:'#111111'}} >Cadastre sua Noticia</Typography>
             <Box component="form" sx={{display:'grid',justifyContent:'center'}} onSubmit={aoSubmeterForm}>
@@ -57,7 +59,7 @@ const AtualizarAutor = ()=>{
                 required
                 type="number"
                 />
-                <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Cadastrar Noticia</Button>
+                <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Atualizar Autor</Button>
             </Box>
         </Box>
         </>
