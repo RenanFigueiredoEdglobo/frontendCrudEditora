@@ -69,6 +69,7 @@ const CadastrarNoticia = ()=>{
                 <TextField
                 value={data_publicacao}
                 onChange={evento=> setData_publicacao(evento.target.value)}
+                label="Data de publicação"
                 margin="dense"
                 />
                 
