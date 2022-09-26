@@ -1,9 +1,9 @@
 import React from "react"
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
-import Cabecalho from "../../Components/Cabecalho"
+import Cabecalho from "../../../Components/Cabecalho"
 import {useEffect, useState} from 'react'
-import api from "./../../api"
-import IAutor from "../../interfaces/IAutor"
+import api from "../../../api"
+import IAutor from "../../../interfaces/IAutor"
 
 const CadastrarNoticia = ()=>{
     const [titulo, setTitulo] = useState('');
@@ -14,13 +14,10 @@ const CadastrarNoticia = ()=>{
     
     useEffect(()=>{
         api.get<IAutor[]>('autores/')
-            .then(resposta=> setAutores(resposta.data))
+            .then(resposta=> setAutores(resposta.data));
     }, []);
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>)=>{
         evento.preventDefault()
-        const formData = new FormData();
-       
-        alert(titulo+conteudo+data_publicacao+autor)
         api.request({
             url: 'cadastrar-noticia/',
             method: 'POST',
@@ -77,7 +74,6 @@ const CadastrarNoticia = ()=>{
                             {item.nome}
                         </MenuItem>)}
                     </Select>
-                
                 </FormControl>
                 <Button sx={{marginTop: 1}} type="submit"  fullWidth variant="outlined" >Cadastrar Noticia</Button>
             </Box>

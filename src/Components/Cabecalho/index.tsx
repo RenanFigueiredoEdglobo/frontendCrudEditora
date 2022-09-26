@@ -31,6 +31,8 @@ const Cabecalho =()=>{
                 <Link to='/'>Home</Link>
                 <Link to='/cadastrar-noticia'>Cadastrar Noticias</Link>
                 <Link to='/cadastrar-autor'>Cadastrar autor</Link>
+                <Link to='/autores'>Vizualizar Autores</Link>
+                <Link to='/noticias'>Vizualizar Noticias</Link>
             </Links>
         </Topo>
     )
