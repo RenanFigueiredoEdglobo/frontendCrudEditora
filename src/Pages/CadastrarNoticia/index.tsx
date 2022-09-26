@@ -19,33 +19,30 @@ const CadastrarNoticia = ()=>{
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>)=>{
         evento.preventDefault()
         const formData = new FormData();
-
-        formData.append('titulo', titulo);
-        formData.append('conteudo',conteudo);
-        formData.append('autor',autor);
-        formData.append('data',data_publicacao);
        
         alert(titulo+conteudo+data_publicacao+autor)
         api.request({
             url: 'cadastrar-noticia/',
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            data: formData
+            data: {
+                titulo: titulo,
+                conteudo: conteudo,
+                autor: autor,
+                data_publicacao: data_publicacao
+            }
         })
             .then(()=>{
+                
                 setTitulo('')
                 setConteudo('')
                 setAutor('')
                 setData_publicacao('')
-                
+   
                 alert('Noticia cadastrada com sucesso')
             })
             .catch(erro => console.log(erro))
     }
     const date = new Date().toLocaleDateString();
-    
     return(
         <>
         <Cabecalho />
@@ -76,8 +73,8 @@ const CadastrarNoticia = ()=>{
                 <FormControl margin="dense" fullWidth>
                     <InputLabel id="select-autor">Autor</InputLabel>
                     <Select labelId="select-autor" value={autor} onChange={evento=> setAutor(evento.target.value)}>
-                        {autores.map(item => <MenuItem  value={item.nome}>
-                            <option value={item.id}>{item.nome}</option>
+                        {autores.map(item => <MenuItem key={item._id} value={item._id}>
+                            {item.nome}
                         </MenuItem>)}
                     </Select>
                 

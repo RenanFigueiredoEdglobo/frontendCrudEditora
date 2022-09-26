@@ -1,5 +1,5 @@
 export default interface IAutor{
-    id: string
+    _id: string
     nome: string
     idade: Number
 }
