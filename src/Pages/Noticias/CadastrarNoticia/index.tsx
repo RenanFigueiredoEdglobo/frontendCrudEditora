@@ -10,12 +10,12 @@ const CadastrarNoticia = ()=>{
     const [conteudo,setConteudo]= useState('');
     const [autor,setAutor] = useState('');
     const [autores,setAutores]= useState<IAutor[]>([]);
-    const [data_publicacao, setData_publicacao]= useState('');
-    
+
     useEffect(()=>{
         api.get<IAutor[]>('autores/')
             .then(resposta=> setAutores(resposta.data));
     }, []);
+    const dateJason = new Date().toJSON();
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>)=>{
         evento.preventDefault()
         api.request({
@@ -25,21 +25,20 @@ const CadastrarNoticia = ()=>{
                 titulo: titulo,
                 conteudo: conteudo,
                 autor: autor,
-                data_publicacao: data_publicacao
+                data_publicacao: dateJason
             }
         })
             .then(()=>{
-                
                 setTitulo('')
                 setConteudo('')
                 setAutor('')
-                setData_publicacao('')
-   
+                
                 alert('Noticia cadastrada com sucesso')
             })
             .catch(erro => console.log(erro))
     }
     const date = new Date().toLocaleDateString();
+    
     return(
         <>
         <Cabecalho />
@@ -61,8 +60,7 @@ const CadastrarNoticia = ()=>{
                 margin="dense"
                 />
                 <TextField
-                value={data_publicacao}
-                onChange={evento=> setData_publicacao(evento.target.value)}
+                value={date}
                 label="Data de publicação"
                 margin="dense"
                 />

@@ -17,6 +17,7 @@ const AtualizarNoticia = ()=>{
         api.get<IAutor[]>('autores/')
             .then(resposta=> SetAutores(resposta.data));
     }, []);
+    const dateJason = new Date().toJSON();
     useEffect(()=>{
         if(parametros.id){
             api.get<INoticias>(`atualizar-noticia/${parametros.id}`)
@@ -30,7 +31,7 @@ const AtualizarNoticia = ()=>{
                 titulo: titulo,
                 conteudo: conteudo,
                 autor: autor,
-                data_publicacao: data_publicacao
+                data_publicacao: dateJason
             })
             .then(()=>{
                 alert("Noticia atualizada com sucesso");
@@ -50,6 +51,7 @@ const AtualizarNoticia = ()=>{
         }
 
     }
+    const date = new Date().toLocaleDateString();
     return(
         <>
         <Cabecalho />
@@ -71,8 +73,7 @@ const AtualizarNoticia = ()=>{
                 required
                 />
                 <TextField
-                value={data_publicacao}
-                onChange={evento=> setData_publicacao(evento.target.value)}
+                value={date}
                 label="Data de publicação"
                 margin="dense"
                 />
